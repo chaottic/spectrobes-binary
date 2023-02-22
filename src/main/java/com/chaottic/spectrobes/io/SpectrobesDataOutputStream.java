@@ -1,9 +1,12 @@
 package com.chaottic.spectrobes.io;
 
-import com.chaottic.spectrobes.Spectrobe;
+import com.chaottic.spectrobes.Util;
 import com.google.common.io.LittleEndianDataOutputStream;
 
-import java.io.*;
+import java.io.DataOutput;
+import java.io.FilterOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 
 public final class SpectrobesDataOutputStream extends FilterOutputStream implements DataOutput {
 
@@ -18,12 +21,12 @@ public final class SpectrobesDataOutputStream extends FilterOutputStream impleme
 
     @Override
     public void writeByte(int v) throws IOException {
-
+        ((LittleEndianDataOutputStream) out).writeByte(v);
     }
 
     @Override
     public void writeShort(int v) throws IOException {
-        ((LittleEndianDataOutputStream) out).writeShort(Spectrobe.flip((short) v));
+        ((LittleEndianDataOutputStream) out).writeShort(Util.swap(v));
     }
 
     @Override

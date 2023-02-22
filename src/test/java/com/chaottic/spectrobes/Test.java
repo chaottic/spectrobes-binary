@@ -17,7 +17,7 @@ public final class Test {
             var spectrobe = new Spectrobe();
             spectrobe.species = Species.VILAR;
 
-            spectrobe.write(dataOutputStream);
+            spectrobe.writeSpectrobes(dataOutputStream);
             dataOutputStream.flush();
         }
     }
@@ -27,7 +27,7 @@ public final class Test {
         var path = Paths.get("test.spectrobe");
 
         try (SpectrobesDataInputStream dataInputStream = new SpectrobesDataInputStream(Files.newInputStream(path))) {
-            var spectrobe = Spectrobe.of(dataInputStream);
+            var spectrobe = Spectrobe.ofSpectrobes(dataInputStream);
 
             System.out.println(spectrobe.species);
         }

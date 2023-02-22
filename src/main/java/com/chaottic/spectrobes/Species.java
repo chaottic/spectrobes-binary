@@ -1,5 +1,11 @@
 package com.chaottic.spectrobes;
 
+import com.google.common.collect.BiMap;
+import com.google.common.collect.ImmutableBiMap;
+
+import java.util.Collections;
+import java.util.HashMap;
+
 public enum Species {
     VILAR,
     VILAMASTA,
@@ -232,33 +238,13 @@ public enum Species {
     YAGIZORA
     ;
 
-    public int to() {
-        return switch (this) {
-            case VILAR -> 14;
-            default -> 0;
-        };
-    }
+    public static final BiMap<Species, String> NAMES;
 
-    public int toBeyondThePortals() {
-        return 0;
-    }
-
-    public int toOrigins() {
-        return 0;
-    }
-
-    public static Species from(int i) {
-        return switch (i) {
-            case 14 -> VILAR;
-            default -> null;
-        };
-    }
-
-    public static Species fromBeyondThePortals(int i) {
-        return Species.VILAR;
-    }
-
-    public static Species fromOrigins(int i) {
-        return Species.VILAR;
+    static {
+        var map = new HashMap<Species, String>(values().length);
+        for (Species value : values()) {
+            map.put(value, value.toString().toLowerCase());
+        }
+        NAMES = ImmutableBiMap.copyOf(Collections.unmodifiableMap(map));
     }
 }

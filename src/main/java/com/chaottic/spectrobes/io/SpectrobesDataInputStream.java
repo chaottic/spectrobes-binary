@@ -1,9 +1,12 @@
 package com.chaottic.spectrobes.io;
 
-import com.chaottic.spectrobes.Spectrobe;
+import com.chaottic.spectrobes.Util;
 import com.google.common.io.LittleEndianDataInputStream;
 
-import java.io.*;
+import java.io.DataInput;
+import java.io.FilterInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 
 public final class SpectrobesDataInputStream extends FilterInputStream implements DataInput {
 
@@ -33,7 +36,7 @@ public final class SpectrobesDataInputStream extends FilterInputStream implement
 
     @Override
     public byte readByte() throws IOException {
-        return 0;
+        return ((LittleEndianDataInputStream) in).readByte();
     }
 
     @Override
@@ -43,7 +46,7 @@ public final class SpectrobesDataInputStream extends FilterInputStream implement
 
     @Override
     public short readShort() throws IOException {
-        return Spectrobe.flip(((LittleEndianDataInputStream) in).readShort());
+        return Util.swap(((LittleEndianDataInputStream) in).readShort());
     }
 
     @Override

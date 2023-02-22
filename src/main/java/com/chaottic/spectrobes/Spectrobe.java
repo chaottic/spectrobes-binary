@@ -5,30 +5,30 @@ import java.io.DataOutput;
 import java.io.IOException;
 
 public final class Spectrobe {
-    private static final short BIT_MASK = 0x7FFF;
-
     public Species species;
-    private int hp;
-    private int atk;
-    private int def;
-    private int color;
-    private int level;
-    private int custompart;
-    private String nickname;
+    public int hp;
+    public int atk;
+    public int def;
+    public int color;
+    public int level;
+    public int part;
+    public int slot;
+    public String nickname;
 
     // Specific for Spectrobes
-    private int maxhp;
-    private int hpexp;
-    private int atkexp;
-    private int defexp;
+    public int maxhp;
+    public int hpexp;
+    public int atkexp;
+    public int defexp;
+    public int id;
+    public int partner;
 
     // Specific for Spectrobes Beyond the Portals
 
     // Specific for Spectrobes Origins
 
-
-    public void write(DataOutput dataOutput) throws IOException {
-        dataOutput.writeShort(species.to());
+    public void writeSpectrobes(DataOutput dataOutput) throws IOException {
+        dataOutput.writeShort(Registries.SPECTROBES.get(species));
         dataOutput.writeShort(hp);
         dataOutput.writeShort(maxhp);
         dataOutput.writeShort(hpexp);
@@ -36,6 +36,13 @@ public final class Spectrobe {
         dataOutput.writeShort(atkexp);
         dataOutput.writeShort(def);
         dataOutput.writeShort(defexp);
+        dataOutput.writeByte(color);
+        dataOutput.writeByte(level);
+        dataOutput.writeByte(part);
+        dataOutput.writeByte(slot);
+        dataOutput.writeInt(0);
+        dataOutput.writeShort(id);
+        dataOutput.writeShort(partner);
     }
 
     public void writeBeyondThePortal(DataOutput dataOutput) throws IOException {
@@ -46,9 +53,9 @@ public final class Spectrobe {
 
     }
 
-    public static Spectrobe of(DataInput dataInput) throws IOException {
+    public static Spectrobe ofSpectrobes(DataInput dataInput) throws IOException {
         var spectrobe = new Spectrobe();
-        spectrobe.species = Species.from(dataInput.readShort());
+        spectrobe.species = Registries.SPECTROBES.get(dataInput.readShort());
         spectrobe.hp = dataInput.readShort();
         spectrobe.maxhp = dataInput.readShort();
         spectrobe.hpexp = dataInput.readShort();
@@ -56,6 +63,13 @@ public final class Spectrobe {
         spectrobe.atkexp = dataInput.readShort();
         spectrobe.def = dataInput.readShort();
         spectrobe.defexp = dataInput.readShort();
+        spectrobe.color = dataInput.readUnsignedByte();
+        spectrobe.level = dataInput.readUnsignedByte();
+        spectrobe.part = dataInput.readUnsignedByte();
+        spectrobe.slot = dataInput.readUnsignedByte();
+        dataInput.readInt();
+        spectrobe.id = dataInput.readShort();
+        spectrobe.partner = dataInput.readShort();
 
         return spectrobe;
     }
@@ -66,12 +80,5 @@ public final class Spectrobe {
 
     public static Spectrobe ofOrigins(DataInput dataInput) throws IOException {
         return new Spectrobe();
-    }
-
-    public static short flip(short s) {
-        var left = s & BIT_MASK;
-        var right = (s >> 8) & BIT_MASK;
-
-        return (short) (((left & BIT_MASK) << 8) | (right & BIT_MASK));
     }
 }
