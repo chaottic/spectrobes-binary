@@ -39,7 +39,7 @@ public final class SpectrobesDataOutputStream extends FilterOutputStream impleme
 
     @Override
     public void writeLong(long v) throws IOException {
-
+        ((DataOutputStream) out).writeLong(v);
     }
 
     @Override

@@ -10,37 +10,52 @@ import java.nio.file.Paths;
 public final class Test {
 
     @org.junit.jupiter.api.Test
-    public void write() throws IOException {
-
+    public void writeSpectrobes() throws IOException {
         var path = Paths.get("komainu.bin");
 
         try (SpectrobesDataOutputStream dataOutputStream = new SpectrobesDataOutputStream(Files.newOutputStream(path))) {
-            var spectrobe = new Spectrobe();
-            spectrobe.setSpecies(Species.KOMAINU);
-            spectrobe.setHp(100);
-            spectrobe.setMaxhp(100);
-            spectrobe.setHpexp(1);
-            spectrobe.setAtk(100);
-            spectrobe.setAtkexp(1);
-            spectrobe.setDef(100);
-            spectrobe.setDefexp(1);
-            spectrobe.setColor(1);
-            spectrobe.setLevel(1);
-            spectrobe.setPart(0);
-            spectrobe.setSlot(1);
-            spectrobe.setNickname("debug");
-
-            spectrobe.writeSpectrobes(dataOutputStream);
+            createKomainu().writeSpectrobes(dataOutputStream);
             dataOutputStream.flush();
         }
     }
 
     @org.junit.jupiter.api.Test
-    public void read() throws IOException {
+    public void readSpectrobes() throws IOException {
         var path = Paths.get("komainu.bin");
 
         try (SpectrobesDataInputStream dataInputStream = new SpectrobesDataInputStream(Files.newInputStream(path))) {
-            System.out.println(Spectrobe.ofSpectrobes(dataInputStream));
+            System.out.println(Spectrobe.readSpectrobes(dataInputStream));
         }
+    }
+
+    @org.junit.jupiter.api.Test
+    public void writeBeyondThePortals() throws IOException {
+        var path = Paths.get("komainu_btp.bin");
+
+        try (SpectrobesDataOutputStream dataOutputStream = new SpectrobesDataOutputStream(Files.newOutputStream(path))) {
+            createKomainu().writeBeyondThePortal(dataOutputStream);
+            dataOutputStream.flush();
+        }
+    }
+
+    public void readBeyondThePortals() throws IOException {
+        var path = Paths.get("komainu_btp.bin");
+
+        try (SpectrobesDataInputStream dataInputStream = new SpectrobesDataInputStream(Files.newInputStream(path))) {
+            System.out.println(Spectrobe.readBeyondThePortal(dataInputStream));
+        }
+    }
+
+    public static Spectrobe createKomainu() {
+        var spectrobe = new Spectrobe();
+        spectrobe.setSpecies(Species.KOMAINU);
+        spectrobe.setMaxHp(100);
+        spectrobe.setHp(100);
+        spectrobe.setAtk(100);
+        spectrobe.setDef(100);
+        spectrobe.setColor(1);
+        spectrobe.setLevel(1);
+        spectrobe.setNickname("komainu");
+        return spectrobe;
     }
 }

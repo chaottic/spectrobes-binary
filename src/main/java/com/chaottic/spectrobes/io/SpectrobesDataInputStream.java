@@ -62,7 +62,7 @@ public final class SpectrobesDataInputStream extends FilterInputStream implement
 
     @Override
     public long readLong() throws IOException {
-        return 0;
+        return ((DataInputStream) in).readLong();
     }
 
     @Override
