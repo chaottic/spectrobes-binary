@@ -53,6 +53,9 @@ public final class Spectrobe {
         dataOutput.writeLong(0);
         dataOutput.writeShort(partnerId);
         dataOutput.writeShort(partner);
+        if (nickname.length() > 6) {
+            nickname = nickname.substring(0, 6);
+        }
         dataOutput.writeChars(nickname);
         dataOutput.writeShort(0xFFFF);
         var size = 15 - nickname.length();

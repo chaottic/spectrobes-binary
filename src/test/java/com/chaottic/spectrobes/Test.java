@@ -38,11 +38,22 @@ public final class Test {
         }
     }
 
+    @org.junit.jupiter.api.Test
     public void readBeyondThePortals() throws IOException {
         var path = Paths.get("komainu_btp.bin");
 
         try (SpectrobesDataInputStream dataInputStream = new SpectrobesDataInputStream(Files.newInputStream(path))) {
             System.out.println(Spectrobe.readBeyondThePortal(dataInputStream));
+        }
+    }
+
+    @org.junit.jupiter.api.Test
+    public void writeOrigins() throws IOException {
+        var path = Paths.get("komainu_o.bin");
+
+        try (SpectrobesDataOutputStream dataOutputStream = new SpectrobesDataOutputStream(Files.newOutputStream(path))) {
+            createKomainu().writeOrigins(dataOutputStream);
+            dataOutputStream.flush();
         }
     }
 
