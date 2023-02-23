@@ -28,14 +28,28 @@ public final class Spectrobe {
 
     // Specific for Spectrobes Beyond the Portals
     private int storageSlot;
-    private int bonusHp;
-    private int bonusAtk;
-    private int bonusDef;
     private int hpGrowth;
     private int atkGrowth;
     private int defGrowth;
 
+    // Shared with Spectrobes Origins
+    private int bonusHp;
+    private int bonusAtk;
+    private int bonusDef;
+
     // Specific for Spectrobes Origins
+    private int form;
+    private int experience;
+    private boolean autoAttack;
+    private int commandAttack;
+    private int comboStrongAttack;
+    private int specialAttack;
+    private int ability;
+    private int lockOnStrongAttack;
+    private int currentCharge;
+    private int index;
+    private int storagePosition;
+
 
     public void writeSpectrobes(DataOutput dataOutput) throws IOException {
         dataOutput.writeShort(Registries.SPECTROBES.get(species));
@@ -85,6 +99,63 @@ public final class Spectrobe {
     }
 
     public void writeOrigins(DataOutput dataOutput) throws IOException {
+        dataOutput.writeInt(Registries.ORIGINS.get(species));
+        dataOutput.writeInt(form);
+        dataOutput.writeInt(experience);
+        dataOutput.writeInt(0xFFFFFFFF);
+        dataOutput.writeInt(0);
+        dataOutput.writeInt(0);
+        dataOutput.writeInt(autoAttack ? 0xFFFFFFFF : 0);
+        dataOutput.writeInt(commandAttack);
+        dataOutput.writeInt(comboStrongAttack);
+        dataOutput.writeInt(0);
+        dataOutput.writeInt(0);
+        dataOutput.writeInt(0xFFFFFFFF);
+        dataOutput.writeInt(0xFFFFFFFF);
+        dataOutput.writeInt(0xFFFFFFFF);
+        dataOutput.writeInt(specialAttack);
+        dataOutput.writeInt(ability);
+        dataOutput.writeInt(lockOnStrongAttack);
+        dataOutput.writeInt(0xFFFFFFFF);
+        dataOutput.writeInt(0xFFFFFFFF);
+        dataOutput.writeInt(0xFFFFFFFF);
+        dataOutput.writeInt(0xFFFFFFFF);
+        dataOutput.writeInt(0xFFFFFFFF);
+        dataOutput.writeInt(0xFFFFFFFF);
+        dataOutput.writeInt(0xFFFFFFFF);
+        dataOutput.writeInt(0xFFFFFFFF);
+        dataOutput.writeInt(0xFFFFFFFF);
+        dataOutput.writeInt(0xFFFFFFFF);
+        dataOutput.writeInt(0xFFFFFFFF);
+        dataOutput.writeInt(0xFFFFFFFF);
+        dataOutput.writeInt(0xFFFFFFFF);
+        dataOutput.writeInt(0xFFFFFFFF);
+        dataOutput.writeInt(level);
+        dataOutput.writeInt(hp);
+        dataOutput.writeInt(currentCharge);
+        dataOutput.writeInt(bonusHp);
+        dataOutput.writeInt(bonusAtk);
+        dataOutput.writeInt(bonusDef);
+        dataOutput.writeInt(0);
+        dataOutput.writeInt(0);
+        dataOutput.writeInt(0);
+        dataOutput.writeInt(0);
+        if (nickname.length() > 6) {
+            nickname = nickname.substring(0, 6);
+        }
+        for (char c : nickname.toCharArray()) {
+            dataOutput.writeByte(c);
+        }
+        var size = 10 - nickname.length();
+        if (size > 0) {
+            for (int i = 0; i < size; i++) {
+                dataOutput.writeInt(0);
+            }
+        }
+        dataOutput.writeByte(0);
+        dataOutput.writeByte(0);
+        dataOutput.writeInt(0);
+        dataOutput.writeInt(0);
     }
 
     public static Spectrobe readSpectrobes(DataInput dataInput) throws IOException {
@@ -133,6 +204,54 @@ public final class Spectrobe {
     }
 
     public static Spectrobe readOrigins(DataInput dataInput) throws IOException {
-        return new Spectrobe();
+        var spectrobe = new Spectrobe();
+        spectrobe.species = Registries.ORIGINS.get(dataInput.readInt());
+        spectrobe.form = dataInput.readInt();
+        spectrobe.experience = dataInput.readInt();
+        dataInput.readInt();
+        dataInput.readInt();
+        dataInput.readInt();
+        spectrobe.autoAttack = dataInput.readInt() > 0;
+        spectrobe.commandAttack = dataInput.readInt();
+        spectrobe.comboStrongAttack = dataInput.readInt();
+        dataInput.readInt();
+        dataInput.readInt();
+        dataInput.readInt();
+        dataInput.readInt();
+        dataInput.readInt();
+        spectrobe.specialAttack = dataInput.readInt();
+        spectrobe.ability = dataInput.readInt();
+        spectrobe.lockOnStrongAttack = dataInput.readInt();
+        dataInput.readInt();
+        dataInput.readInt();
+        dataInput.readInt();
+        dataInput.readInt();
+        dataInput.readInt();
+        dataInput.readInt();
+        dataInput.readInt();
+        dataInput.readInt();
+        dataInput.readInt();
+        dataInput.readInt();
+        dataInput.readInt();
+        dataInput.readInt();
+        dataInput.readInt();
+        dataInput.readInt();
+        spectrobe.level = dataInput.readInt();
+        spectrobe.hp = dataInput.readInt();
+        spectrobe.currentCharge = dataInput.readInt();
+        spectrobe.bonusHp = dataInput.readInt();
+        spectrobe.bonusAtk = dataInput.readInt();
+        spectrobe.bonusDef = dataInput.readInt();
+        dataInput.readInt();
+        dataInput.readInt();
+        dataInput.readInt();
+        dataInput.readInt();
+        var chars = new char[6];
+        for (int i = 0; i < 6; i++) {
+            chars[i] = (char) dataInput.readUnsignedByte();
+        }
+        spectrobe.nickname = new String(chars);
+
+        return spectrobe;
     }
 }

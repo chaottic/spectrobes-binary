@@ -2,7 +2,10 @@ package com.chaottic.spectrobes;
 
 import com.chaottic.spectrobes.io.SpectrobesDataInputStream;
 import com.chaottic.spectrobes.io.SpectrobesDataOutputStream;
+import com.google.common.io.LittleEndianDataOutputStream;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -51,9 +54,18 @@ public final class Test {
     public void writeOrigins() throws IOException {
         var path = Paths.get("komainu_o.bin");
 
-        try (SpectrobesDataOutputStream dataOutputStream = new SpectrobesDataOutputStream(Files.newOutputStream(path))) {
+        try (DataOutputStream dataOutputStream = new DataOutputStream(Files.newOutputStream(path))) {
             createKomainu().writeOrigins(dataOutputStream);
             dataOutputStream.flush();
+        }
+    }
+
+    @org.junit.jupiter.api.Test
+    public void readOrigins() throws IOException {
+        var path = Paths.get("komainu_o.bin");
+
+        try (DataInputStream dataInputStream = new DataInputStream(Files.newInputStream(path))) {
+            System.out.println(Spectrobe.readOrigins(dataInputStream));
         }
     }
 
