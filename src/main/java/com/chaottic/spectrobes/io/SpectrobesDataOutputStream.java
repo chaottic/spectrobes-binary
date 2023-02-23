@@ -3,15 +3,13 @@ package com.chaottic.spectrobes.io;
 import com.chaottic.spectrobes.Util;
 import com.google.common.io.LittleEndianDataOutputStream;
 
-import java.io.DataOutput;
-import java.io.FilterOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
 
 public final class SpectrobesDataOutputStream extends FilterOutputStream implements DataOutput {
 
     public SpectrobesDataOutputStream(OutputStream out) {
-        super(new LittleEndianDataOutputStream(out));
+        super(new DataOutputStream(out));
     }
 
     @Override
@@ -21,17 +19,17 @@ public final class SpectrobesDataOutputStream extends FilterOutputStream impleme
 
     @Override
     public void writeByte(int v) throws IOException {
-        ((LittleEndianDataOutputStream) out).writeByte(v);
+        ((DataOutputStream) out).writeByte(v);
     }
 
     @Override
     public void writeShort(int v) throws IOException {
-        ((LittleEndianDataOutputStream) out).writeShort(Util.swap(v));
+        ((DataOutputStream) out).writeShort(Util.swap(v));
     }
 
     @Override
     public void writeChar(int v) throws IOException {
-
+        writeShort(v);
     }
 
     @Override
@@ -61,7 +59,9 @@ public final class SpectrobesDataOutputStream extends FilterOutputStream impleme
 
     @Override
     public void writeChars(String s) throws IOException {
-
+        for (byte b : s.getBytes(StandardCharsets.US_ASCII)) {
+            writeChar(b);
+        }
     }
 
     @Override

@@ -15,7 +15,7 @@ public final class Resources {
     public static FileSystem getFileSystem() throws IOException {
         var location = Resources.class.getProtectionDomain().getCodeSource().getLocation().toString();
 
-        return FileSystems.newFileSystem(Paths.get(location.substring(location.lastIndexOf(':'))), Resources.class.getClassLoader());
+        return FileSystems.newFileSystem(Paths.get(location.substring(location.lastIndexOf(':') + 1)), Resources.class.getClassLoader());
     }
 
     public static URL getResource(String path) {
