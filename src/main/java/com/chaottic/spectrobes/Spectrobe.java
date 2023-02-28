@@ -8,52 +8,54 @@ import java.io.IOException;
 
 @Data
 public final class Spectrobe {
-    private static final short BIT_MASK = 0x7FFF;
-
     private Species species;
     private int currentHp;
     private int maximumHp;
     private int atk;
     private int def;
-    private int hpExperience;
-    private int atkExperience;
-    private int defExperience;
+    private int hpMinergy;
+    private int atkMinergy;
+    private int defMinergy;
     private int color;
     private int level;
     private int customPart;
-    private int currentSlot;
-    private int bond;
+    private int prizmodSlot;
+    private int bondId;
     private int bondPartner;
     private String nickname;
 
-    public void writeSpectrobes(DataOutput dataOutput) throws IOException {
-
+    public void write(DataOutput dataOutput) throws IOException {
+        dataOutput.writeShort(NumberMap.SPECTROBES.getNumber(species));
+        dataOutput.writeShort(currentHp);
+        dataOutput.writeShort(maximumHp);
+        dataOutput.writeShort(hpMinergy);
+        dataOutput.writeShort(atk);
+        dataOutput.writeShort(atkMinergy);
+        dataOutput.writeShort(def);
+        dataOutput.writeShort(defMinergy);
+        dataOutput.writeByte(color);
+        dataOutput.writeByte(level);
+        dataOutput.writeByte(customPart);
+        dataOutput.writeByte(prizmodSlot);
+        dataOutput.writeLong(0);
+        dataOutput.writeShort(bondId);
+        dataOutput.writeShort(bondPartner);
+        if (nickname.length() > 6) {
+            nickname = nickname.substring(0, 6);
+        }
+        dataOutput.writeChars(nickname);
+        dataOutput.writeShort(0xFFFF);
+        var length = 15 - nickname.length();
+        if (length > 0) {
+            for (int i = 0; i < length; i++) {
+                dataOutput.writeShort(0);
+            }
+        }
     }
 
-    public void writeBeyondThePortals(DataOutput dataOutput) throws IOException {
+    public static Spectrobe read(DataInput dataInput) throws IOException {
+        var spectrobe = new Spectrobe();
 
-    }
-
-    public void writeOrigins(DataOutput dataOutput) throws IOException {
-
-    }
-
-    public static Spectrobe readSpectrobes(DataInput dataInput) throws IOException {
-        return new Spectrobe();
-    }
-
-    public static Spectrobe readBeyondThePortals(DataInput dataInput) throws IOException {
-        return new Spectrobe();
-    }
-
-    public static Spectrobe readOrigins(DataInput dataInput) throws IOException {
-        return new Spectrobe();
-    }
-
-    private static int swap(int i) {
-        var l = i & BIT_MASK;
-        var r = (i >> 8) & BIT_MASK;
-
-        return ((l & BIT_MASK) << 8) | (r & BIT_MASK);
+        return spectrobe;
     }
 }

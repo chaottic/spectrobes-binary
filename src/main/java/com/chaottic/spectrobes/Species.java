@@ -1,7 +1,9 @@
 package com.chaottic.spectrobes;
 
-import net.darkhax.namespaced.Identifier;
-import net.darkhax.namespaced.NamespacedRegistry;
+import com.google.common.collect.BiMap;
+import com.google.common.collect.ImmutableBiMap;
+
+import java.util.Map;
 
 public enum Species {
     VILAR,
@@ -235,74 +237,72 @@ public enum Species {
     YAGIZORA
     ;
 
-    public static final NamespacedRegistry<Species> NAMESPACED_REGISTRY = new NamespacedRegistry<>();
-
-    static {
-        NAMESPACED_REGISTRY.register(new Identifier("spectrobes", "vilar"), VILAR);
-        NAMESPACED_REGISTRY.register(new Identifier("spectrobes", "vilamasta"), VILAMASTA);
-        NAMESPACED_REGISTRY.register(new Identifier("spectrobes", "vilanox"), VILANOX);
-        NAMESPACED_REGISTRY.register(new Identifier("spectrobes", "segu"), SEGU);
-        NAMESPACED_REGISTRY.register(new Identifier("spectrobes", "segulos"), SEGULOS);
-        NAMESPACED_REGISTRY.register(new Identifier("spectrobes", "segulara"), SEGULARA);
-        NAMESPACED_REGISTRY.register(new Identifier("spectrobes", "harumi"), HARUMI);
-        NAMESPACED_REGISTRY.register(new Identifier("spectrobes", "harumite"), HARUMITE);
-        NAMESPACED_REGISTRY.register(new Identifier("spectrobes", "harumitey"), HARUMITEY);
-        NAMESPACED_REGISTRY.register(new Identifier("spectrobes", "spiko"), SPIKO);
-        NAMESPACED_REGISTRY.register(new Identifier("spectrobes", "spikan"), SPIKAN);
-        NAMESPACED_REGISTRY.register(new Identifier("spectrobes", "spikanor"), SPIKANOR);
-        NAMESPACED_REGISTRY.register(new Identifier("spectrobes", "nagu"), NAGU);
-        NAMESPACED_REGISTRY.register(new Identifier("spectrobes", "naguryu"), NAGURYU);
-        NAMESPACED_REGISTRY.register(new Identifier("spectrobes", "naguzoro"), NAGUZORO);
-        NAMESPACED_REGISTRY.register(new Identifier("spectrobes", "inkana"), INKANA);
-        NAMESPACED_REGISTRY.register(new Identifier("spectrobes", "inkanapa"), INKANAPA);
-        NAMESPACED_REGISTRY.register(new Identifier("spectrobes", "inkaflare"), INKAFLARE);
-        NAMESPACED_REGISTRY.register(new Identifier("spectrobes", "dongor"), DONGOR);
-        NAMESPACED_REGISTRY.register(new Identifier("spectrobes", "dongora"), DONGORA);
-        NAMESPACED_REGISTRY.register(new Identifier("spectrobes", "dongiga"), DONGIGA);
-        NAMESPACED_REGISTRY.register(new Identifier("spectrobes", "bartor"), BARTOR);
-        NAMESPACED_REGISTRY.register(new Identifier("spectrobes", "bartolor"), BARTOLOR);
-        NAMESPACED_REGISTRY.register(new Identifier("spectrobes", "bartolosa"), BARTOLOSA);
-        NAMESPACED_REGISTRY.register(new Identifier("spectrobes", "aoi"), AOI);
-        NAMESPACED_REGISTRY.register(new Identifier("spectrobes", "aoba"), AOBA);
-        NAMESPACED_REGISTRY.register(new Identifier("spectrobes", "aobasar"), AOBASAR);
-        NAMESPACED_REGISTRY.register(new Identifier("spectrobes", "komainu"), KOMAINU);
-        NAMESPACED_REGISTRY.register(new Identifier("spectrobes", "komanoto"), KOMANOTO);
-        NAMESPACED_REGISTRY.register(new Identifier("spectrobes", "komadoros"), KOMADOROS);
-        NAMESPACED_REGISTRY.register(new Identifier("spectrobes", "shakin"), SHAKIN);
-        NAMESPACED_REGISTRY.register(new Identifier("spectrobes", "shakor"), SHAKOR);
-        NAMESPACED_REGISTRY.register(new Identifier("spectrobes", "shakoblad"), SHAKOBLAD);
-        NAMESPACED_REGISTRY.register(new Identifier("spectrobes", "zoza"), ZOZA);
-        NAMESPACED_REGISTRY.register(new Identifier("spectrobes", "zozane"), ZOZANE);
-        NAMESPACED_REGISTRY.register(new Identifier("spectrobes", "zozanero"), ZOZANERO);
-        NAMESPACED_REGISTRY.register(new Identifier("spectrobes", "grilda"), GRILDA);
-        NAMESPACED_REGISTRY.register(new Identifier("spectrobes", "grilden"), GRILDEN);
-        NAMESPACED_REGISTRY.register(new Identifier("spectrobes", "grildragos"), GRILDRAGOS);
-        NAMESPACED_REGISTRY.register(new Identifier("spectrobes", "gejio"), GEJIO);
-        NAMESPACED_REGISTRY.register(new Identifier("spectrobes", "gejigen"), GEJIGEN);
-        NAMESPACED_REGISTRY.register(new Identifier("spectrobes", "gejigage"), GEJIGAGE);
-        NAMESPACED_REGISTRY.register(new Identifier("spectrobes", "kasumi"), KASUMI);
-        NAMESPACED_REGISTRY.register(new Identifier("spectrobes", "kasumite"), KASUMITE);
-        NAMESPACED_REGISTRY.register(new Identifier("spectrobes", "kasumire"), KASUMIRE);
-        NAMESPACED_REGISTRY.register(new Identifier("spectrobes", "samukabu"), SAMUKABU);
-        NAMESPACED_REGISTRY.register(new Identifier("spectrobes", "samurite"), SAMURITE);
-        NAMESPACED_REGISTRY.register(new Identifier("spectrobes", "samugeki"), SAMUGEKI);
-        NAMESPACED_REGISTRY.register(new Identifier("spectrobes", "kubaku"), KUBAKU);
-        NAMESPACED_REGISTRY.register(new Identifier("spectrobes", "kuganon"), KUGANON);
-        NAMESPACED_REGISTRY.register(new Identifier("spectrobes", "kugaster"), KUGASTER);
-        NAMESPACED_REGISTRY.register(new Identifier("spectrobes", "masetto"), MASETTO);
-        NAMESPACED_REGISTRY.register(new Identifier("spectrobes", "maserobo"), MASEROBO);
-        NAMESPACED_REGISTRY.register(new Identifier("spectrobes", "masetosu"), MASETOSU);
-        NAMESPACED_REGISTRY.register(new Identifier("spectrobes", "danawa"), DANAWA);
-        NAMESPACED_REGISTRY.register(new Identifier("spectrobes", "danapix"), DANAPIX);
-        NAMESPACED_REGISTRY.register(new Identifier("spectrobes", "danaphant"), DANAPHANT);
-        NAMESPACED_REGISTRY.register(new Identifier("spectrobes", "tenkro"), TENKRO);
-        NAMESPACED_REGISTRY.register(new Identifier("spectrobes", "senkro"), SENKRO);
-        NAMESPACED_REGISTRY.register(new Identifier("spectrobes", "gekikro"), GEKIKRO);
-        NAMESPACED_REGISTRY.register(new Identifier("spectrobes", "mossari"), MOSSARI);
-        NAMESPACED_REGISTRY.register(new Identifier("spectrobes", "mossarito"), MOSSARITO);
-        NAMESPACED_REGISTRY.register(new Identifier("spectrobes", "mossax"), MOSSAX);
-        NAMESPACED_REGISTRY.register(new Identifier("spectrobes", "mesa"), MESA);
-        NAMESPACED_REGISTRY.register(new Identifier("spectrobes", "mesabone"), MESABONE);
-        NAMESPACED_REGISTRY.register(new Identifier("spectrobes", "mesathorn"), MESATHORN);
-    }
+    public static final BiMap<Namespace, Species> BI_MAP = ImmutableBiMap.ofEntries(
+            Map.entry(new Namespace("spectrobes", "vilar"), VILAR),
+            Map.entry(new Namespace("spectrobes", "vilamasta"), VILAMASTA),
+            Map.entry(new Namespace("spectrobes", "vilanox"), VILANOX),
+            Map.entry(new Namespace("spectrobes", "segu"), SEGU),
+            Map.entry(new Namespace("spectrobes", "segulos"), SEGULOS),
+            Map.entry(new Namespace("spectrobes", "segulara"), SEGULARA),
+            Map.entry(new Namespace("spectrobes", "harumi"), HARUMI),
+            Map.entry(new Namespace("spectrobes", "harumite"), HARUMITE),
+            Map.entry(new Namespace("spectrobes", "harumitey"), HARUMITEY),
+            Map.entry(new Namespace("spectrobes", "spiko"), SPIKO),
+            Map.entry(new Namespace("spectrobes", "spikan"), SPIKAN),
+            Map.entry(new Namespace("spectrobes", "spikanor"), SPIKANOR),
+            Map.entry(new Namespace("spectrobes", "nagu"), NAGU),
+            Map.entry(new Namespace("spectrobes", "naguryu"), NAGURYU),
+            Map.entry(new Namespace("spectrobes", "naguzoro"), NAGUZORO),
+            Map.entry(new Namespace("spectrobes", "inkana"), INKANA),
+            Map.entry(new Namespace("spectrobes", "inkanapa"), INKANAPA),
+            Map.entry(new Namespace("spectrobes", "inkaflare"), INKAFLARE),
+            Map.entry(new Namespace("spectrobes", "dongor"), DONGOR),
+            Map.entry(new Namespace("spectrobes", "dongora"), DONGORA),
+            Map.entry(new Namespace("spectrobes", "dongiga"), DONGIGA),
+            Map.entry(new Namespace("spectrobes", "bartor"), BARTOR),
+            Map.entry(new Namespace("spectrobes", "bartolor"), BARTOLOR),
+            Map.entry(new Namespace("spectrobes", "bartolosa"), BARTOLOSA),
+            Map.entry(new Namespace("spectrobes", "aoi"), AOI),
+            Map.entry(new Namespace("spectrobes", "aoba"), AOBA),
+            Map.entry(new Namespace("spectrobes", "aobasar"), AOBASAR),
+            Map.entry(new Namespace("spectrobes", "komainu"), KOMAINU),
+            Map.entry(new Namespace("spectrobes", "komanoto"), KOMANOTO),
+            Map.entry(new Namespace("spectrobes", "komadoros"), KOMADOROS),
+            Map.entry(new Namespace("spectrobes", "shakin"), SHAKIN),
+            Map.entry(new Namespace("spectrobes", "shakor"), SHAKOR),
+            Map.entry(new Namespace("spectrobes", "shakoblad"), SHAKOBLAD),
+            Map.entry(new Namespace("spectrobes", "zoza"), ZOZA),
+            Map.entry(new Namespace("spectrobes", "zozane"), ZOZANE),
+            Map.entry(new Namespace("spectrobes", "zozanero"), ZOZANERO),
+            Map.entry(new Namespace("spectrobes", "grilda"), GRILDA),
+            Map.entry(new Namespace("spectrobes", "grilden"), GRILDEN),
+            Map.entry(new Namespace("spectrobes", "grildragos"), GRILDRAGOS),
+            Map.entry(new Namespace("spectrobes", "gejio"), GEJIO),
+            Map.entry(new Namespace("spectrobes", "gejigen"), GEJIGEN),
+            Map.entry(new Namespace("spectrobes", "gejigage"), GEJIGAGE),
+            Map.entry(new Namespace("spectrobes", "kasumi"), KASUMI),
+            Map.entry(new Namespace("spectrobes", "kasumite"), KASUMITE),
+            Map.entry(new Namespace("spectrobes", "kasumire"), KASUMIRE),
+            Map.entry(new Namespace("spectrobes", "samukabu"), SAMUKABU),
+            Map.entry(new Namespace("spectrobes", "samurite"), SAMURITE),
+            Map.entry(new Namespace("spectrobes", "samugeki"), SAMUGEKI),
+            Map.entry(new Namespace("spectrobes", "kubaku"), KUBAKU),
+            Map.entry(new Namespace("spectrobes", "kuganon"), KUGANON),
+            Map.entry(new Namespace("spectrobes", "kugaster"), KUGASTER),
+            Map.entry(new Namespace("spectrobes", "masetto"), MASETTO),
+            Map.entry(new Namespace("spectrobes", "maserobo"), MASEROBO),
+            Map.entry(new Namespace("spectrobes", "masetosu"), MASETOSU),
+            Map.entry(new Namespace("spectrobes", "danawa"), DANAWA),
+            Map.entry(new Namespace("spectrobes", "danapix"), DANAPIX),
+            Map.entry(new Namespace("spectrobes", "danaphant"), DANAPHANT),
+            Map.entry(new Namespace("spectrobes", "tenkro"), TENKRO),
+            Map.entry(new Namespace("spectrobes", "senkro"), SENKRO),
+            Map.entry(new Namespace("spectrobes", "gekikro"), GEKIKRO),
+            Map.entry(new Namespace("spectrobes", "mossari"), MOSSARI),
+            Map.entry(new Namespace("spectrobes", "mossarito"), MOSSARITO),
+            Map.entry(new Namespace("spectrobes", "mossax"), MOSSAX),
+            Map.entry(new Namespace("spectrobes", "mesa"), MESA),
+            Map.entry(new Namespace("spectrobes", "mesabone"), MESABONE),
+            Map.entry(new Namespace("spectrobes", "mesathorn"), MESATHORN)
+    );
 }
